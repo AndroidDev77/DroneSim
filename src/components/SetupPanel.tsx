@@ -103,7 +103,9 @@ export function SetupPanel({
                   <option value="none">No gamepad detected</option>
                 )}
               </select>
-              <div className="text-xs text-white">Browser Gamepad API requires joystick/gamepad mode from your receiver.</div>
+              <div className="text-xs text-white">
+                Browser Gamepad API works with many USB receivers when they present as a joystick/gamepad. If your receiver uses HID-only mode, the browser may not expose it here.
+              </div>
             </div>
 
             <div className="rounded-2xl border border-slate-800 p-3 space-y-3 bg-slate-950/60">

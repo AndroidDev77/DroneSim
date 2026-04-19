@@ -95,7 +95,7 @@ export default function TinyWhoopSimulator() {
     ro.observe(mountRef.current);
     simRef.current = { resetDrone: () => resetDrone(true) };
 
-    let raf = 0;
+    let raf: number | null = null;
     const animate = () => {
       raf = requestAnimationFrame(animate);
       const dt = Math.min(clock.getDelta(), 0.033);
@@ -258,7 +258,7 @@ export default function TinyWhoopSimulator() {
     animate();
 
     return () => {
-      cancelAnimationFrame(raf);
+      if (raf != null) cancelAnimationFrame(raf);
       ro.disconnect();
       renderer.dispose();
       scene.traverse((obj) => {
