@@ -9,7 +9,9 @@ export function useGamepadState() {
     const tick = () => {
       const list = Array.from(navigator.getGamepads?.() || []).filter(Boolean) as Gamepad[];
       setPads(list);
-      if (selectedIndex == null && list.length) setSelectedIndex(list[0].index);
+      if (list.length) {
+        setSelectedIndex((prev) => (prev == null ? list[0].index : prev));
+      }
       raf = requestAnimationFrame(tick);
     };
     tick();
@@ -17,7 +19,9 @@ export function useGamepadState() {
     const onConnect = () => {
       const list = Array.from(navigator.getGamepads?.() || []).filter(Boolean) as Gamepad[];
       setPads(list);
-      if (selectedIndex == null && list.length) setSelectedIndex(list[0].index);
+      if (list.length) {
+        setSelectedIndex((prev) => (prev == null ? list[0].index : prev));
+      }
     };
 
     const onDisconnect = () => {
@@ -33,7 +37,7 @@ export function useGamepadState() {
       window.removeEventListener("gamepadconnected", onConnect);
       window.removeEventListener("gamepaddisconnected", onDisconnect);
     };
-  }, [selectedIndex]);
+  }, []);
 
   const active = useMemo(() => pads.find((p) => p.index === selectedIndex) || pads[0] || null, [pads, selectedIndex]);
 
