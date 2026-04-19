@@ -213,7 +213,7 @@ export default function TinyWhoopSimulator() {
       drone.position.copy(droneState.pos);
       drone.rotation.copy(droneState.euler);
       props.forEach((p, i) => {
-        p.rotation.y += ((armed ? 0.8 : 0.12) + hud.throttle * 1.8) * (i % 2 === 0 ? 1 : -1);
+        p.rotation.y += ((armed ? 0.8 : 0.12) + throttleIn * 1.8) * (i % 2 === 0 ? 1 : -1);
       });
 
       const camTarget = drone.position.clone();
@@ -273,7 +273,7 @@ export default function TinyWhoopSimulator() {
         mountRef.current.removeChild(renderer.domElement);
       }
     };
-  }, [calibration, paused, armed, levelMode, rates, cameraMode, simScale, hud.throttle]);
+  }, [calibration, paused, armed, levelMode, rates, cameraMode, simScale]);
 
   useEffect(() => {
     if (!calibrationCapture || !active) return;
